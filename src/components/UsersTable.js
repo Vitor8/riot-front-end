@@ -6,11 +6,7 @@ function UsersTable() {
   const [hasCheckedSessionStorage, setHasCheckedSessionStorage] = useState(false);
 
   useEffect(() => {
-    let savedUsers = [];
     const savedData = JSON.parse(localStorage.getItem('users')) || [];
-
-    console.log(savedData);
-
     setUsers(savedData);
     setHasCheckedSessionStorage(true);
   },[]);
