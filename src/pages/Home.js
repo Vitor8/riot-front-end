@@ -11,6 +11,7 @@ function Home() {
       <input type="text" placeholder="Buscar" />
       <br />
       <UsersTable />
+
       { redirectToRegisterPage ? <Navigate to="/cadastrar" /> : null }
     </div>
   );

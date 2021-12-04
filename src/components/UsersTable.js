@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import UserCard from './UserCard';
 
 function UsersTable() {
+  const [users, setUsers] = useState([]);
+  const [hasCheckedSessionStorage, setHasCheckedSessionStorage] = useState(false);
+
+  useEffect(() => {
+    let savedUsers = [];
+    const savedData = JSON.parse(localStorage.getItem('users')) || [];
+
+    console.log(savedData);
+
+    setUsers(savedData);
+    setHasCheckedSessionStorage(true);
+  },[]);
+
+
   return (
     <table> 
       <thead>
@@ -8,10 +23,11 @@ function UsersTable() {
           <th>ID</th>
           <th>Nome</th>
           <th>Idade</th>
-          <th>GitHub User</th>
+          <th>GitHubUser</th>
           <th>Endereço</th>
         </tr>
       </thead>
+      { hasCheckedSessionStorage && users.map((user) => <UserCard key={ user.id } user={ user } /> )}
     </table>
   );
 }
