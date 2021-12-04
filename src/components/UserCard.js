@@ -9,16 +9,20 @@ function UserCard({ user }) {
     return address;
   }
 
-  function deleteUser(userId) {
-    const savedData = JSON.parse(localStorage.getItem('users'));
-    const newDataAfterDelete = savedData.filter((user) => user.id !== userId);
-    localStorage.setItem('users', JSON.stringify(newDataAfterDelete));
+  async function deleteUser(userId) {
+    const rawResponse = await fetch(`http://localhost:3001/user/${userId}`, {
+      method: 'DELETE',
+    });
+    
+    const content = await rawResponse.json();
     document.location.reload();
+  
+    console.log(content);
   }
 
   function confirmDelete() {
     const confirm = window.confirm('Deseja apagar esta linha ?');
-    if (confirm) deleteUser(user.id);
+    if (confirm) deleteUser(user._id);
     return null;
   }
 
