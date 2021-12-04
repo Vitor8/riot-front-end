@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
+import { getCEP, getGitHub } from '../services/api';
 
 function Cadastrar() {
   const [redirectToHomePage, setRedirectToHomePage] = useState(false);
@@ -13,9 +14,7 @@ function Cadastrar() {
 
   async function fetchGitHub() {
     const user = newUserData['github-user'];
-    const response = await fetch(`https://api.github.com/search/users?q=${user}`);
-    const json = await response.json();
-    const data = json["items"][0]; 
+    const data = await getGitHub(user);
 
     const dataUser = {
       id: data.id,
@@ -28,29 +27,10 @@ function Cadastrar() {
     return dataUser;
   };
 
-  function saveLocalStorage(newUser) {
-    const savedData = JSON.parse(localStorage.getItem('users')) || [];
-    const len = savedData.length;
-    const newUserWithId = {
-      id: len + 1,
-      ...newUser
-    }
-    const dataWithNewUser = [...savedData, newUserWithId];
-    localStorage.setItem('users', JSON.stringify(dataWithNewUser));
-    setRedirectToHomePage(true);
-  }
-
-  async function saveNewUser() {
-    const gitHubData = await fetchGitHub();
-    
-    const newUser = {
-      ...newUserData,
-      fullAddress,
-      gitHubData
-    }
-
-    saveLocalStorage(newUser);
-  }
+  async function fetchCEP(cep) {
+    const data = await getCEP(cep);
+    autoCompleteAddress(data);
+  };
 
   function handleChange({ value, name }) {
     setNewUserData({
@@ -58,20 +38,6 @@ function Cadastrar() {
       [name]: value
     });
   }
-
-  function autoCompleteAddress(address) {
-    setState(address.uf);
-    setCity(address.localidade);
-    setDistrict(address.bairro);
-    setStreet(address.logradouro);
-    setFullAddress(address);
-  }
-
-  async function fetchCEP(cep) {
-    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-    const data = await response.json();
-    autoCompleteAddress(data);
-  };
 
   function getDataCEP(cep) {
     if (cep.length === 8) {
@@ -86,6 +52,35 @@ function Cadastrar() {
     }
   }
  
+  function autoCompleteAddress(address) {
+    setState(address.uf);
+    setCity(address.localidade);
+    setDistrict(address.bairro);
+    setStreet(address.logradouro);
+    setFullAddress(address);
+  }
+
+  async function saveNewUser() {
+    const gitHubData = await fetchGitHub();
+    
+    const newUser = {
+      ...newUserData,
+      fullAddress,
+      gitHubData
+    }
+
+    const savedData = JSON.parse(localStorage.getItem('users')) || [];
+    const len = savedData.length;
+    const newUserWithId = {
+      id: len,
+      ...newUser
+    }
+    
+    const dataWithNewUser = [...savedData, newUserWithId];
+    localStorage.setItem('users', JSON.stringify(dataWithNewUser));
+    setRedirectToHomePage(true);
+  }
+
   return (
     <div>
       <RegisterForm
