@@ -60,6 +60,18 @@ function Cadastrar() {
     setFullAddress(address);
   }
 
+  async function createUser(user) {
+    const rawResponse = await fetch('http://localhost:3001/user', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user })
+    });
+
+    const content = await rawResponse.json();
+  
+    console.log(content);
+  }
+
   async function saveNewUser() {
     const gitHubData = await fetchGitHub();
     
@@ -69,15 +81,8 @@ function Cadastrar() {
       gitHubData
     }
 
-    const savedData = JSON.parse(localStorage.getItem('users')) || [];
-    const len = savedData.length;
-    const newUserWithId = {
-      id: len,
-      ...newUser
-    }
-    
-    const dataWithNewUser = [...savedData, newUserWithId];
-    localStorage.setItem('users', JSON.stringify(dataWithNewUser));
+    await createUser(newUser);
+
     setRedirectToHomePage(true);
   }
 
