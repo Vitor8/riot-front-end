@@ -3,14 +3,21 @@ import UserCard from './UserCard';
 
 function UsersTable() {
   const [users, setUsers] = useState([]);
-  const [hasCheckedSessionStorage, setHasCheckedSessionStorage] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem('users')) || [];
-    setUsers(savedData);
-    setHasCheckedSessionStorage(true);
-  },[]);
+    const getAllUsers = async () => {
+      const rawResponse = await fetch('http://localhost:3001/users', {
+        method: 'GET',
+      });
 
+      const json = await rawResponse.json();
+      const users = json.users;
+      setUsers(users);
+      setIsLoading(false);
+    };
+    getAllUsers();
+  }, []);
 
   return (
     <table> 
@@ -23,7 +30,7 @@ function UsersTable() {
           <th>Endereço</th>
         </tr>
       </thead>
-      { hasCheckedSessionStorage && users.map((user) => <UserCard key={ user.id } user={ user } /> )}
+      { !isLoading && users.map((user) => <UserCard key={ user._id } user={ user } /> )}
     </table>
   );
 }

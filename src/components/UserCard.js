@@ -23,14 +23,14 @@ function UserCard({ user }) {
   }
 
   function saveUserIdToUpdate() {
-    localStorage.setItem('userIdToUpdate', JSON.stringify(user.id));
+    localStorage.setItem('userIdToUpdate', JSON.stringify(user._id));
     setRedirectToUpdatePage(true);
   }
 
   return (
     <tbody>
       <tr>
-        <td>{ user.id }</td>
+        <td>{ user._id }</td>
         <td>{ user.name }</td>
         <td>{ user.age }</td>
         <td>{ user['github-user'] }</td>

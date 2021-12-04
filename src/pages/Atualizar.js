@@ -19,11 +19,17 @@ function Atualizar() {
   const [fullAddress, setFullAddress] = useState({});
   
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem('userIdToUpdate'));
-    const savedData = JSON.parse(localStorage.getItem('users'));
-    const userToUpdate = savedData.filter((user) => user.id === userId)[0];
-    setUserId(userId);
-    setupCurrentValues(userToUpdate);
+    const getUserById = async () => {
+      const userId = JSON.parse(localStorage.getItem('userIdToUpdate'));
+      const rawResponse = await fetch(`http://localhost:3001/user/${userId}`, {
+        method: 'GET',
+      });
+      const userToUpdate = await rawResponse.json();
+      setUserId(userId);
+      setupCurrentValues(userToUpdate['user']);
+    };
+    
+    getUserById();
   },[]);
 
   useEffect(() => {
@@ -85,12 +91,15 @@ function Atualizar() {
       gitHubData
     }
 
-    const savedData = JSON.parse(localStorage.getItem('users'));
-    const index = savedData.findIndex((user) => user.id === userId);
-    const newData = [...savedData];
-    newData[index] = updatedUser;
+    const rawResponse = await fetch('http://localhost:3001/user', {
+      method: 'PUT',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user: updatedUser })
+    });
 
-    localStorage.setItem('users', JSON.stringify(newData));
+    const content = await rawResponse.json();
+  
+    console.log(content);
 
     setRedirectToHomePage(true);
   }
