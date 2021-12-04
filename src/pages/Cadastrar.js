@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
+import RegisterForm from '../components/RegisterForm';
 
 function Cadastrar() {
   const [redirectToHomePage, setRedirectToHomePage] = useState(false);
@@ -32,7 +33,7 @@ function Cadastrar() {
     const len = savedData.length;
     const newUserWithId = {
       id: len + 1,
-      newUser
+      ...newUser
     }
     const dataWithNewUser = [...savedData, newUserWithId];
     localStorage.setItem('users', JSON.stringify(dataWithNewUser));
@@ -87,103 +88,15 @@ function Cadastrar() {
  
   return (
     <div>
-      <label>Adicionar</label>
-      
-      <br /><br />
-      <div>
-        <label htmlFor="input-name">Nome</label>
-        <input
-          id="input-name"
-          type="text"
-          placeholder="Digite um nome"
-          name="name"
-          onChange={(e) => handleChange(e.target)}
-        />
-      </div>
+      <RegisterForm
+        handleChange={ handleChange }
+        getDataCEP={ getDataCEP }
+        state={ state }
+        city={ city }
+        district={ district }
+        street={ street }
+      />
 
-      <br />
-      <div>
-        <label htmlFor="input-age">Idade</label>
-        <input
-          type="number"
-          id="input-age"
-          name="age"
-          min="0"
-          max="150"
-          onChange={(e) => handleChange(e.target)}
-        />
-
-        <label htmlFor="input-github-user">GitHub User</label>
-        <input
-          type="text"
-          id="input-github-user"
-          name="github-user"
-          onChange={(e) => handleChange(e.target)}
-        />
-      </div>
-
-      <br />
-      <div>
-        <label htmlFor="input-cep">CEP</label>
-        <input type="text" id="input-cep" onChange={ (e) => getDataCEP(e.target.value) } />
-
-        <label htmlFor="input-estado">Estado</label>
-        <input
-          type="text"
-          id="input-estado"
-          value={ state }
-          name="state"
-          disabled={true}
-        />
-
-        <label htmlFor="input-cidade">Cidade</label>
-        <input
-          type="text"
-          id="input-cidade"
-          value={ city }
-          name="city"
-          disabled={true}
-        />
-
-        <label htmlFor="input-bairro">Bairro</label>
-        <input
-          type="text"
-          id="input-bairro"
-          value={ district }
-          name="district"
-          disabled={true}
-        />
-      </div>
-
-      <br />
-      <div>
-        <label htmlFor="input-rua">Rua</label>
-        <input
-          type="text"
-          id="input-rua"
-          value={ street }
-          name="street"
-          disabled={true}
-        />
-
-        <label htmlFor="input-rua-número">Número</label>
-        <input
-          type="text"
-          id="input-rua-número"
-          name="number"
-          onChange={ (e) => handleChange(e.target)}
-        />
-
-        <label htmlFor="input-complemento">Complemento</label>
-        <input
-          type="text"
-          id="input-complemento"
-          name="complement"
-          onChange={ (e) => handleChange(e.target) }
-        />
-      </div>
-
-      <br />
       <button onClick={ () =>  setRedirectToHomePage(true) }>Cancelar</button>
       <button onClick={ () => saveNewUser() }>Salvar</button>
       { redirectToHomePage ?  <Navigate to="/" /> : null}
