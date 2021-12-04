@@ -29,7 +29,12 @@ function Cadastrar() {
 
   function saveLocalStorage(newUser) {
     const savedData = JSON.parse(localStorage.getItem('users')) || [];
-    const dataWithNewUser = [...savedData, newUser];
+    const len = savedData.length;
+    const newUserWithId = {
+      id: len + 1,
+      newUser
+    }
+    const dataWithNewUser = [...savedData, newUserWithId];
     localStorage.setItem('users', JSON.stringify(dataWithNewUser));
     setRedirectToHomePage(true);
   }
