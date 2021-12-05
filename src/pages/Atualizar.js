@@ -26,9 +26,13 @@ function Atualizar() {
   useEffect(() => {
     const getUserById = async () => {
       const userId = JSON.parse(localStorage.getItem('userIdToUpdate'));
+      const token = JSON.parse(localStorage.getItem('token'));
+
       const rawResponse = await fetch(`http://localhost:3001/user/${userId}`, {
         method: 'GET',
+        headers: { 'Authorization': token },
       });
+
       const userToUpdate = await rawResponse.json();
       setUserId(userId);
       setupCurrentValues(userToUpdate['user']);
@@ -114,9 +118,10 @@ function Atualizar() {
       gitHubData
     }
 
+    const token = JSON.parse(localStorage.getItem('token'));
     const rawResponse = await fetch('http://localhost:3001/user', {
       method: 'PUT',
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json', 'Authorization': token },
       body: JSON.stringify({ user: updatedUser })
     });
 
@@ -160,7 +165,7 @@ function Atualizar() {
       >
         Salvar
       </button>
-      { redirectToHomePage ?  <Navigate to="/" /> : null}
+      { redirectToHomePage ?  <Navigate to="/home" /> : null}
     </div>
   );
 }

@@ -81,9 +81,14 @@ function Cadastrar() {
   }
 
   async function createUser(user) {
+    const token = JSON.parse(localStorage.getItem('token'));
+
     const rawResponse = await fetch('http://localhost:3001/user', {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        'Content-Type': "application/json",
+        'Authorization': token,
+      },
       body: JSON.stringify({ user })
     });
 
@@ -155,7 +160,7 @@ function Cadastrar() {
       >
         Salvar
       </button>
-      { redirectToHomePage ?  <Navigate to="/" /> : null}
+      { redirectToHomePage ?  <Navigate to="/home" /> : null}
     </div>
   );
 }

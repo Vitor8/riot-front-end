@@ -11,8 +11,10 @@ function UserCard({ user }) {
   }
 
   async function deleteUser(userId) {
+    const token = JSON.parse(localStorage.getItem('token'));
     const rawResponse = await fetch(`http://localhost:3001/user/${userId}`, {
       method: 'DELETE',
+      headers: { 'Authorization': token },
     });
     
     const content = await rawResponse.json();

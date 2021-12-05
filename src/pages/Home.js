@@ -10,8 +10,11 @@ function Home() {
 
   useEffect(() => {
     const getAllUsers = async () => {
+      const token = JSON.parse(localStorage.getItem('token'));
+
       const rawResponse = await fetch('http://localhost:3001/users', {
         method: 'GET',
+        headers: { 'Authorization': token },
       });
 
       const json = await rawResponse.json();

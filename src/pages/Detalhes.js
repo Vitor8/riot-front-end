@@ -8,9 +8,13 @@ function Detalhes() {
   useEffect(() => {
     const getUserById = async () => {
       const userId = JSON.parse(sessionStorage.getItem('userIdToDetailPage'));
+      const token = JSON.parse(localStorage.getItem('token'));
+
       const rawResponse = await fetch(`http://localhost:3001/user/${userId}`, {
         method: 'GET',
+        headers: { 'Authorization': token },
       });
+      
       const user = await rawResponse.json();
       setUser(user['user']);
       setIsLoading(false);

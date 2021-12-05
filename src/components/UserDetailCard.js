@@ -16,7 +16,7 @@ function UserDetailCard({ user }) {
       <p>Id: { user['_id'] }</p>
       <p>Endereço: { joinAddress() }</p>
       <img src={ user['gitHubData']['avatar'] } alt="avata do usuário" />
-      <Link to="/">Volta página Inicial</Link>
+      <Link to="/home">Volta página Inicial</Link>
     </div>
   )
 }
