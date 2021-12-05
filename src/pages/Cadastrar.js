@@ -31,7 +31,7 @@ function Cadastrar() {
   },[name, age, gitHubUser, cep, number, messageInvalidCep, messageInvalidGitHubUser]);
 
   function shouldEnableSaveButton() {
-    if (name !=='' && age !== '' && gitHubUser !== '' && cep !== '' && number !== '' && !messageInvalidCep && !messageInvalidGitHubUser) return true;
+    if (name !=='' && age !== '' && gitHubUser !== '' && cep !== '' && number !== '' && !messageInvalidCep) return true;
     return false;
   }
 
@@ -99,7 +99,10 @@ function Cadastrar() {
   async function saveNewUser() {
     const gitHubData = await fetchGitHub();
 
-    if (!gitHubData) return setMessageInvalidGitHubUser(true);
+    if (!gitHubData) {
+      setMessageUserAlreadyRegistered(false);
+      return setMessageInvalidGitHubUser(true);
+    }
 
     const newUser = {
       name,
@@ -114,9 +117,10 @@ function Cadastrar() {
 
     const userRegistered = await createUser(newUser);
 
-    console.log(userRegistered);
-
-    if (!userRegistered) return setMessageUserAlreadyRegistered(true);
+    if (!userRegistered) { 
+      setMessageInvalidGitHubUser(false);
+      return setMessageUserAlreadyRegistered(true);
+    }
 
     setRedirectToHomePage(true);
   }

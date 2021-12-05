@@ -46,7 +46,7 @@ function Atualizar() {
   },[newName, newAge, newGitHubUser, newCEP, newNumber, messageInvalidCep, messageInvalidGitHubUser]);
 
   function shouldEnableSaveButton() {
-    if (newName !=='' && newAge !== '' && newGitHubUser !== '' && newCEP !== '' && newNumber !== '' && !messageInvalidCep && !messageInvalidGitHubUser) return true;
+    if (newName !=='' && newAge !== '' && newGitHubUser !== '' && newCEP !== '' && newCEP.length === 8 && newNumber !== '' && !messageInvalidCep) return true;
     return false;
   }
 
@@ -103,6 +103,7 @@ function Atualizar() {
     if (!gitHubData) return setMessageInvalidGitHubUser(true);
     
     const updatedUser = {
+      id: userId, 
       age: newAge,
       cep: newCEP,
       gitHubUser: newGitHubUser,
@@ -120,7 +121,7 @@ function Atualizar() {
     });
 
     const content = await rawResponse.json();
-  
+
     console.log(content);
 
     setRedirectToHomePage(true);

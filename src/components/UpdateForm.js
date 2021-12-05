@@ -1,7 +1,8 @@
 import React from 'react'
 
 function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, setNewGitHubUser, newCEP, setNewCEP,
-  newState, newCity, newDistrict, newStreet, newNumber, setNewNumber, newComplement, setNewComplement}) {
+  newState, newCity, newDistrict, newStreet, newNumber, setNewNumber, newComplement, setNewComplement, messageInvalidCep, messageInvalidGitHubUser,
+  messageUserAlreadyRegistered}) {
   return (
     <div>
       <label>Editar</label>
@@ -109,6 +110,11 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           onChange={ (e) => setNewComplement(e.target.value) }
         />
       </div>
+      
+      <br />
+      { messageInvalidCep && <p>CEP não encontrado</p> }
+      { messageInvalidGitHubUser && <p>GitHub User não encontrado</p> }
+      { messageUserAlreadyRegistered && <p>GitHub User já registrado</p> }
     </div>
   )
 }
