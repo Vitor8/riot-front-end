@@ -1,17 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import UserCard from './UserCard';
 
-function UsersTable({ users, isLoading }) {
+function UsersTable({ users, isLoading, setSearchUsers }) {
+  const initialKeys = {
+    "_id": false,
+    "name": false,
+    "age": false,
+    "gitHubUser": false
+  }
+  const [clicked, setClicked] = useState(initialKeys);
+  const [headerKey, setHeaderKey] = useState();
+  const [keysArray, setKeysArray] = useState([]);
+  const [keysArraySort, setKeysArraySort] = useState([]);
+  
+  function sort(headerKey) {
+    setHeaderKey(headerKey);
+    let keys = [];
+    users.forEach((user) => keys.push(user[`${ headerKey }`]));
+    setKeysArray(keys);
+    setClicked({
+      ...clicked,
+      [`${headerKey}`]: !clicked[`${headerKey}`]
+    });
+  }
+
+  useEffect(() => {
+    let keysSort = [];
+    if (clicked[`${headerKey}`]) {
+      keysSort = keysArray.sort();
+    } else {
+      keysSort = keysArray.sort().reverse();
+    }
+    setKeysArraySort(keysSort);
+  }, [clicked]);
+
+  useEffect(() => {
+    let usersSort = [];
+    keysArraySort.forEach((key) => {
+      const user = users.find((user) => user[`${headerKey}`] === key);
+      usersSort.push(user);
+    });
+    setSearchUsers(usersSort);
+  }, [keysArraySort]);
 
   return (
     <table> 
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Idade</th>
-          <th>GitHubUser</th>
-          <th>Endereço</th>
+          <th id="_id" onClick={ (e) => sort(e.target.id) }>ID</th>
+          <th id="name" onClick={ (e) => sort(e.target.id) }>Nome</th>
+          <th id="age" onClick={ (e) => sort(e.target.id) }>Idade</th>
+          <th id="gitHubUser" onClick={ (e) => sort(e.target.id) } >GitHubUser</th>
+          <th >Endereço</th>
         </tr>
       </thead>
       { !isLoading && users.map((user) => <UserCard key={ user._id } user={ user } /> )}

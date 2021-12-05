@@ -37,7 +37,7 @@ function Home() {
       <button onClick={ () => setRedirectToRegisterPage(true) }>Cadastrar</button>
       <input type="text" placeholder="Nome ou GitHub User..." onChange={ (e) => getSearchUsers(e.target.value) } />
       <br />
-      <UsersTable users={ searchUsers } isLoading={ isLoading } />
+      <UsersTable users={ searchUsers } isLoading={ isLoading } setSearchUsers={ setSearchUsers } />
 
       { redirectToRegisterPage ? <Navigate to="/cadastrar" /> : null }
     </div>
