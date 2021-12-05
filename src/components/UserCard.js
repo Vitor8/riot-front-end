@@ -37,7 +37,7 @@ function UserCard({ user }) {
         <td>{ user._id }</td>
         <td>{ user.name }</td>
         <td>{ user.age }</td>
-        <td>{ user['github-user'] }</td>
+        <td>{ user['gitHubUser'] }</td>
         <td>
           { joinAddress() } 
           <button onClick={ () => confirmDelete() }>D</button>

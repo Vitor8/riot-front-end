@@ -1,11 +1,12 @@
 import React from 'react';
 
-function RegisterForm({ handleChange, getDataCEP, state, city, district, street }) {
+function RegisterForm({ name, age, gitHubUser, number, complement, messageInvalidCep, messageInvalidGitHubUser,
+  messageUserAlreadyRegistered, setName, setAge, setGitHubUser, setNumber, setComplement, getDataCEP, state, city, district, street }) {
 
   return (
     <div>
       <label>Adicionar</label>
-      
+    
       <br /><br />
       <div>
         <label htmlFor="input-name">Nome</label>
@@ -14,7 +15,8 @@ function RegisterForm({ handleChange, getDataCEP, state, city, district, street 
           type="text"
           placeholder="Digite um nome"
           name="name"
-          onChange={(e) => handleChange(e.target)}
+          value={ name }
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
 
@@ -27,7 +29,8 @@ function RegisterForm({ handleChange, getDataCEP, state, city, district, street 
           name="age"
           min="0"
           max="150"
-          onChange={(e) => handleChange(e.target)}
+          value={ age }
+          onChange={(e) => setAge(e.target.value)}
         />
 
         <label htmlFor="input-github-user">GitHub User</label>
@@ -35,7 +38,8 @@ function RegisterForm({ handleChange, getDataCEP, state, city, district, street 
           type="text"
           id="input-github-user"
           name="github-user"
-          onChange={(e) => handleChange(e.target)}
+          value={ gitHubUser }
+          onChange={(e) => setGitHubUser(e.target.value)}
         />
       </div>
 
@@ -88,7 +92,8 @@ function RegisterForm({ handleChange, getDataCEP, state, city, district, street 
           type="text"
           id="input-rua-número"
           name="number"
-          onChange={ (e) => handleChange(e.target)}
+          value={ number }
+          onChange={ (e) => setNumber(e.target.value)}
         />
 
         <label htmlFor="input-complemento">Complemento</label>
@@ -96,11 +101,15 @@ function RegisterForm({ handleChange, getDataCEP, state, city, district, street 
           type="text"
           id="input-complemento"
           name="complement"
-          onChange={ (e) => handleChange(e.target) }
+          value={ complement }
+          onChange={ (e) => setComplement(e.target.value) }
         />
       </div>
 
       <br />
+      { messageInvalidCep && <p>CEP não encontrado</p> }
+      { messageInvalidGitHubUser && <p>GitHub User não encontrado</p> }
+      { messageUserAlreadyRegistered && <p>GitHub User já registrado</p> }
     </div>
   );
 }

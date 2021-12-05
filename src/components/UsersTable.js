@@ -13,6 +13,7 @@ function UsersTable() {
 
       const json = await rawResponse.json();
       const users = json.users;
+      console.log(users);
       setUsers(users);
       setIsLoading(false);
     };

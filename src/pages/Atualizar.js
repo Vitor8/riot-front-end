@@ -6,6 +6,7 @@ import UpdateForm from '../components/UpdateForm';
 function Atualizar() {
   const [redirectToHomePage, setRedirectToHomePage] = useState(false);
   const [userId, setUserId] = useState('');
+
   const [newName, setNewName] = useState('');
   const [newAge, setNewAge] = useState('');
   const [newGitHubUser, setNewGitHubUser] = useState('');
@@ -17,6 +18,10 @@ function Atualizar() {
   const [newNumber, setNewNumber] = useState('');
   const [newComplement, setNewComplement] = useState('');
   const [fullAddress, setFullAddress] = useState({});
+  const [disableSaveButton, setDisableSaveButton] = useState(true);
+  const [messageInvalidCep, setMessageInvalidCep] = useState(false);
+  const [messageInvalidGitHubUser, setMessageInvalidGitHubUser] = useState(false);
+  const [messageUserAlreadyRegistered, setMessageUserAlreadyRegistered] = useState(false);
   
   useEffect(() => {
     const getUserById = async () => {
@@ -33,6 +38,19 @@ function Atualizar() {
   },[]);
 
   useEffect(() => {
+    if (shouldEnableSaveButton()) { 
+      setDisableSaveButton(false);
+    } else {
+      setDisableSaveButton(true);
+    }
+  },[newName, newAge, newGitHubUser, newCEP, newNumber, messageInvalidCep, messageInvalidGitHubUser]);
+
+  function shouldEnableSaveButton() {
+    if (newName !=='' && newAge !== '' && newGitHubUser !== '' && newCEP !== '' && newNumber !== '' && !messageInvalidCep && !messageInvalidGitHubUser) return true;
+    return false;
+  }
+
+  useEffect(() => {
     if (newCEP.length === 8) {
       fetchCEP(newCEP);
     }
@@ -40,6 +58,8 @@ function Atualizar() {
 
   async function fetchCEP(cep) {
     const data = await getCEP(cep);
+    if (!data || data.erro) return setMessageInvalidCep(true);
+    setMessageInvalidCep(false);
     autoCompleteAddress(data);
   };
 
@@ -48,14 +68,13 @@ function Atualizar() {
     setNewCity(address.localidade);
     setNewDistrict(address.bairro);
     setNewStreet(address.logradouro);
-    setNewStreet(address.logradouro);
     setFullAddress(address);
   }
 
   function setupCurrentValues(userToUpdate) {
     setNewName(userToUpdate['name']);
     setNewAge(userToUpdate['age']);
-    setNewGitHubUser(userToUpdate['github-user']);
+    setNewGitHubUser(userToUpdate['gitHubUser']);
     setNewCEP(userToUpdate['cep']);
     setNewNumber(userToUpdate['number']);
     const complement = userToUpdate['complement'];
@@ -64,6 +83,8 @@ function Atualizar() {
 
   async function fetchGitHub() {
     const data = await getGitHub(newGitHubUser);
+
+    if (!data) return false;
 
     const dataUser = {
       id: data.id,
@@ -78,12 +99,13 @@ function Atualizar() {
 
   async function updateUser() {
     const gitHubData = await fetchGitHub();
+
+    if (!gitHubData) return setMessageInvalidGitHubUser(true);
     
     const updatedUser = {
       age: newAge,
       cep: newCEP,
-      'github-user': newGitHubUser,
-      id: userId,
+      gitHubUser: newGitHubUser,
       name: newName,
       number: newNumber,
       complement: newComplement,
@@ -123,12 +145,20 @@ function Atualizar() {
         setNewNumber={ setNewNumber }
         newComplement={ newComplement }
         setNewComplement={ setNewComplement }
+        messageInvalidCep={ messageInvalidCep }
+        messageInvalidGitHubUser={ messageInvalidGitHubUser }
+        messageUserAlreadyRegistered={ messageUserAlreadyRegistered }
       />
 
       <br />
 
       <button onClick={ () =>  setRedirectToHomePage(true) }>Cancelar</button>
-      <button onClick={ () => updateUser() }>Salvar</button>
+      <button
+        disabled={ disableSaveButton }
+        onClick={ () => updateUser() }
+      >
+        Salvar
+      </button>
       { redirectToHomePage ?  <Navigate to="/" /> : null}
     </div>
   );
