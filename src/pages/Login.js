@@ -23,18 +23,18 @@ function Login() {
   return (
     <div>
       <div>
-        <label htmlFor="email">Email: </label>
-        <input type="text" id="email" onChange={ (e) => setEmail(e.target.value)  } />
+        <label htmlFor="email" data-testid="email-label">Email: </label>
+        <input type="text" id="email" onChange={ (e) => setEmail(e.target.value)  } data-testid="email-input"/>
       </div>
       <br />
 
       <div>
-        <label htmlFor="senha">Senha: </label>
-        <input type="text" id="senha" onChange={ (e) => setPassword(e.target.value)  } />
+        <label htmlFor="senha" data-testid="password-label">Senha: </label>
+        <input type="password" id="senha" onChange={ (e) => setPassword(e.target.value)  } data-testid="password-input" />
       </div>
 
       <br />
-      <button onClick={ () => loginWithAuthentification() }>Login</button>
+      <button onClick={ () => loginWithAuthentification() } data-testid="login-button" >Login</button>
 
       { redirectToHomePage && <Navigate to='/home' /> }
     </div>

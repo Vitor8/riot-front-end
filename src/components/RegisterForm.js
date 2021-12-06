@@ -16,6 +16,7 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           placeholder="Digite um nome"
           name="name"
           value={ name }
+          data-testid="name-input"
           onChange={(e) => setName(e.target.value)}
         />
       </div>
@@ -30,6 +31,7 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           min="0"
           max="150"
           value={ age }
+          data-testid="age-input"
           onChange={(e) => setAge(e.target.value)}
         />
 
@@ -38,7 +40,9 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           type="text"
           id="input-github-user"
           name="github-user"
+          placeholder="Usuário do GitHub"
           value={ gitHubUser }
+          data-testid="github-input"
           onChange={(e) => setGitHubUser(e.target.value)}
         />
       </div>
@@ -46,7 +50,13 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
       <br />
       <div>
         <label htmlFor="input-cep">CEP</label>
-        <input type="text" id="input-cep" onChange={ (e) => getDataCEP(e.target.value) } />
+        <input
+          type="text"
+          id="input-cep"
+          onChange={ (e) => getDataCEP(e.target.value) }
+          placeholder="Ex: 17031450"
+          data-testid="cep-input"
+        />
 
         <label htmlFor="input-estado">Estado</label>
         <input
@@ -54,6 +64,7 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           id="input-estado"
           value={ state }
           name="state"
+          data-testid="state-input"
           disabled={true}
         />
 
@@ -63,6 +74,7 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           id="input-cidade"
           value={ city }
           name="city"
+          data-testid="city-input"
           disabled={true}
         />
 
@@ -72,6 +84,7 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           id="input-bairro"
           value={ district }
           name="district"
+          data-testid="district-input"
           disabled={true}
         />
       </div>
@@ -84,6 +97,7 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           id="input-rua"
           value={ street }
           name="street"
+          data-testid="street-input"
           disabled={true}
         />
 
@@ -93,6 +107,8 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           id="input-rua-número"
           name="number"
           value={ number }
+          placeholder="---"
+          data-testid="number-input"
           onChange={ (e) => setNumber(e.target.value)}
         />
 
@@ -102,6 +118,8 @@ function RegisterForm({ name, age, gitHubUser, number, complement, messageInvali
           id="input-complemento"
           name="complement"
           value={ complement }
+          placeholder="Ex: Casa 01, Ap 20 / BL 01..."
+          data-testid="complement-input"
           onChange={ (e) => setComplement(e.target.value) }
         />
       </div>

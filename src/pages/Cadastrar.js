@@ -94,8 +94,6 @@ function Cadastrar() {
 
     const content = await rawResponse.json();
 
-    console.log(content);
-
     if (content.message === 'User already registered') return false;
 
     return true;
@@ -157,6 +155,7 @@ function Cadastrar() {
       <button
         disabled={ disableSaveButton }
         onClick={ () => saveNewUser() }
+        data-testid="save-button"
       >
         Salvar
       </button>
