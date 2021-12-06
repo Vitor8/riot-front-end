@@ -148,3 +148,136 @@ describe('1 - Testa se é possível criar novos usuários', () => {
   });
 
 });
+
+describe('2 - Testa se é possível editar usuários', () => {
+  test('Ao clicar no botão de Atualizar, a página de edição deve ser renderizada', async () => {
+    const history = createMemoryHistory();
+    history.push('/home');
+    render(
+      <BrowserRouter history={history}>
+        <App />
+      </BrowserRouter>,
+    );
+
+    await waitFor(() => screen.getByText('Laura'));
+
+    const updateButton = screen.getAllByTestId('update-button');
+    const lastUpdateButtonIndex = updateButton.length - 1;
+    fireEvent.click(updateButton[lastUpdateButtonIndex]);
+
+    await waitFor(() => screen.getByText(/Editar/i));
+
+    expect(screen.getByText(/Editar/i)).toBeInTheDocument();
+  });
+
+  test('A página de Edição deve possuir todos os campos de preenchimento necessários', async () => {
+    const history = createMemoryHistory();
+    history.push('/atualizar');
+    render(
+      <BrowserRouter history={history}>
+        <App />
+      </BrowserRouter>,
+    );
+
+    const nameLabel = screen.getByText(/Nome/i);
+    const ageLabel = screen.getByText('Idade');
+    const gitHubLabel = screen.getByText(/GitHub User/i);
+    const cepLabel = screen.getByText(/CEP/i);
+    const stateLabel = screen.getByText(/Estado/i);
+    const cityLabel = screen.getByText(/Cidade/i);
+    const districtLabel = screen.getByText(/Bairro/i);
+    const streetLabel = screen.getByText(/Rua/i);
+    const numberLabel = screen.getByText(/Número/i);
+    const complementLabel = screen.getByText(/Complemento/i);
+
+    const nameInput = screen.getByTestId("name-input");
+    const AgeInput = screen.getByTestId("age-input");
+    const gitHubInput = screen.getByTestId("github-input");
+    const cepInput = screen.getByTestId("cep-input");
+    const stateInput = screen.getByTestId("state-input");
+    const cityInput = screen.getByTestId("city-input");
+    const districtInput = screen.getByTestId("district-input");
+    const streetInput = screen.getByTestId("street-input");
+    const numberInput = screen.getByTestId("number-input");
+    const complementInput = screen.getByTestId("complement-input");
+
+    const saveButton = screen.getByTestId("save-button");
+
+    expect(nameLabel).toBeInTheDocument();
+    expect(ageLabel).toBeInTheDocument();
+    expect(gitHubLabel).toBeInTheDocument();
+    expect(cepLabel).toBeInTheDocument();
+    expect(stateLabel).toBeInTheDocument();
+    expect(cityLabel).toBeInTheDocument();
+    expect(districtLabel).toBeInTheDocument();
+    expect(streetLabel).toBeInTheDocument();
+    expect(numberLabel).toBeInTheDocument();
+    expect(complementLabel).toBeInTheDocument();
+
+    expect(nameInput).toBeInTheDocument();
+    expect(AgeInput).toBeInTheDocument();
+    expect(gitHubInput).toBeInTheDocument();
+    expect(cepInput).toBeInTheDocument();
+    expect(stateInput).toBeInTheDocument();
+    expect(cityInput).toBeInTheDocument();
+    expect(districtInput).toBeInTheDocument();
+    expect(streetInput).toBeInTheDocument();
+    expect(numberInput).toBeInTheDocument();
+    expect(complementInput).toBeInTheDocument();
+
+    expect(saveButton).toBeInTheDocument();
+  });
+
+  // OBSERVAÇÃO: Não consegui fazer o teste abaixo funcionar, por isso o deixei comentado
+  // test('Verifica se a edição de um usuário é bem sucedida', async () => {
+  //   const history = createMemoryHistory();
+  //   history.push('/home');
+  //   render(
+  //     <BrowserRouter history={history}>
+  //       <App />
+  //     </BrowserRouter>,
+  //   );
+
+  //   await waitFor(() => screen.getByText('Laura'));
+
+  //   const updateButton = screen.getAllByText(/Atualizar/i);
+  //   const lastUpdateButtonIndex = updateButton.length - 1;
+  //   fireEvent.click(updateButton[lastUpdateButtonIndex]);
+
+  //   await waitFor(() => screen.getByText(/Editar/i));
+
+  //   userEvent.type(screen.getByTestId("name-input"), 'Laura Gusmão');
+
+  //   fireEvent.click(screen.getByTestId("save-button"));
+
+  //   await waitFor(() => screen.getByText(/Cadastrar/i));
+
+  //   expect(screen.getByText('Laura Gusmão')).toBeInTheDocument();
+  // });
+});
+
+// OBSERVAÇÃO: Não consegui fazer o teste abaixo funcionar, por isso o deixei comentado
+// describe('3 - Teste se é possível deletar usuários', () => {
+//   test('Verifica se é possível deletar um usuário', async () => {
+//     const confirmSpy = jest.spyOn(window,'confirm').mockImplementation(); 
+
+//     const history = createMemoryHistory();
+//     history.push('/home');
+//     render(
+//       <BrowserRouter history={history}>
+//         <App />
+//       </BrowserRouter>,
+//     );
+
+//     await waitFor(() => screen.getByText('Laura'));
+
+//     const deleteButton = screen.getAllByTestId('delete-button');
+//     const lastDeleteButtonIndex = deleteButton.length - 1;
+//     fireEvent.click(deleteButton[lastDeleteButtonIndex]);
+
+//     window.confirm = jest.fn(() => true)
+
+//     expect(confirmSpy).toHaveBeenCalledTimes(1);
+//     expect(screen.getByText('Laura')).not.toBeInTheDocument();
+//   });
+// });

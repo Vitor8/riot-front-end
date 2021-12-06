@@ -48,8 +48,8 @@ function UserCard({ user }) {
         <td>{ user['gitHubUser'] }</td>
         <td>
           { joinAddress() } 
-          <button onClick={ () => confirmDelete() }>D</button>
-          <button onClick={ () => saveUserIdToUpdate() }>A</button>
+          <button onClick={ () => confirmDelete() } data-testid="delete-button">D</button>
+          <button onClick={ () => saveUserIdToUpdate() } data-testid="update-button">A</button>
           <button onClick={ () => saveUserIdToDetailPage() }>V</button>
         </td>
       </tr>

@@ -162,6 +162,7 @@ function Atualizar() {
       <button
         disabled={ disableSaveButton }
         onClick={ () => updateUser() }
+        data-testid="save-button"
       >
         Salvar
       </button>

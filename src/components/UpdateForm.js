@@ -16,6 +16,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           placeholder="Digite um nome"
           name="name"
           value={ newName }
+          data-testid="name-input"
           onChange={ (e) => setNewName(e.target.value)  }
         />
       </div>
@@ -30,6 +31,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           min="0"
           max="150"
           value={ newAge }
+          data-testid="age-input"
           onChange={ (e) => setNewAge(e.target.value) }
         />
 
@@ -39,6 +41,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-github-user"
           name="github-user"
           value={ newGitHubUser }
+          data-testid="github-input"
           onChange={ (e) =>  setNewGitHubUser(e.target.value) }
         />
       </div>
@@ -51,6 +54,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-cep"
           value={ newCEP }
           onChange={ (e) => setNewCEP(e.target.value) }
+          data-testid="cep-input"
         />
 
         <label htmlFor="input-estado">Estado</label>
@@ -59,6 +63,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-estado"
           name="state"
           value={ newState }
+          data-testid="state-input"
           disabled={true}
         />
 
@@ -68,6 +73,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-cidade"
           name="city"
           value={ newCity }
+          data-testid="city-input"
           disabled={true}
         />
 
@@ -77,6 +83,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-bairro"
           name="district"
           value={ newDistrict }
+          data-testid="district-input"
           disabled={true}
         />
       </div>
@@ -89,6 +96,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-rua"
           name="street"
           value={ newStreet }
+          data-testid="street-input"
           disabled={true}
         />
 
@@ -98,6 +106,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-rua-número"
           name="number"
           value={ newNumber }
+          data-testid="number-input"
           onChange={ (e) => setNewNumber(e.target.value)}
         />
 
@@ -107,6 +116,7 @@ function UpdateForm({ newName, setNewName, newAge, setNewAge, newGitHubUser, set
           id="input-complemento"
           name="complement"
           value={ newComplement }
+          data-testid="complement-input"
           onChange={ (e) => setNewComplement(e.target.value) }
         />
       </div>
