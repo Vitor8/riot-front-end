@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UserDetailCard from '../components/UserDetailCard';
+import Header from '../components/Header';
 
 function Detalhes() {
   const [user, setUser] = useState({});
@@ -25,6 +26,7 @@ function Detalhes() {
 
   return (
     <div>
+      <Header />
       { !isLoading && <UserDetailCard user={ user } /> }
     </div>
   )

@@ -1,0 +1,7 @@
+.detail-container {
+  display: flex;
+  font-size: 13px;
+  padding: 1%;
+  margin-top: 30px;
+  justify-content: space-evenly;
+}
