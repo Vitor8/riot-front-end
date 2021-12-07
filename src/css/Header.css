@@ -1,0 +1,10 @@
+.header-container {
+  background-image: linear-gradient(to right,rgb(21,46,62),rgb(1, 98, 158));
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  margin-left: 50px;
+}
