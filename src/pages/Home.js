@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import UsersTable from '../components/UsersTable';
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
+import Header from '../components/Header';
+import '../css/Home.css';
 
 function Home() {
   const [redirectToRegisterPage, setRedirectToRegisterPage] = useState(false);
@@ -33,12 +35,24 @@ function Home() {
   }
 
   return (
-    <div>
-      <button onClick={ () => setRedirectToRegisterPage(true) }>Cadastrar</button>
-      <input type="text" placeholder="Nome ou GitHub User..." onChange={ (e) => getSearchUsers(e.target.value) } />
-      <br />
-      <UsersTable users={ searchUsers } isLoading={ isLoading } setSearchUsers={ setSearchUsers } />
+    <div className="home-container">
+      <Header />
+      <div className="home-content">
+        <h4>Teste Engenheiro de Software Full Stack</h4>
 
+        <div className="table-container">
+          <div className="buttons-container">
+            <button className="button-register" onClick={ () => setRedirectToRegisterPage(true) }>
+              Cadastrar
+            </button>
+            <input type="text" placeholder="Busca" onChange={ (e) => getSearchUsers(e.target.value) } />
+          </div>
+
+          <br />
+          <UsersTable users={ searchUsers } isLoading={ isLoading } setSearchUsers={ setSearchUsers } />
+        </div>
+
+      </div>
       { redirectToRegisterPage ? <Navigate to="/cadastrar" /> : null }
     </div>
   );

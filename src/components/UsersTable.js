@@ -46,12 +46,13 @@ function UsersTable({ users, isLoading, setSearchUsers }) {
   return (
     <table> 
       <thead>
-        <tr>
-          <th id="_id" onClick={ (e) => sort(e.target.id) }>ID</th>
-          <th id="name" onClick={ (e) => sort(e.target.id) }>Nome</th>
-          <th id="age" onClick={ (e) => sort(e.target.id) }>Idade</th>
-          <th id="gitHubUser" onClick={ (e) => sort(e.target.id) } >GitHubUser</th>
-          <th >Endereço</th>
+        <tr className="table-header-container">
+          <th id="_id" onClick={ (e) => sort(e.target.id) } className="table-header-content">ID</th>
+          <th id="name" onClick={ (e) => sort(e.target.id) } className="table-header-content">Nome</th>
+          <th id="age" onClick={ (e) => sort(e.target.id) } className="table-header-content">Idade</th>
+          <th id="gitHubUser" onClick={ (e) => sort(e.target.id) } className="table-header-content">GitHub User</th>
+          <th className="table-header-address">Endereço</th>
+          <th></th>
         </tr>
       </thead>
       { !isLoading && users.map((user) => <UserCard key={ user._id } user={ user } /> )}

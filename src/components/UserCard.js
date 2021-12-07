@@ -41,13 +41,15 @@ function UserCard({ user }) {
 
   return (
     <tbody>
-      <tr>
-        <td>{ user._id }</td>
-        <td>{ user.name }</td>
-        <td>{ user.age }</td>
-        <td>{ user['gitHubUser'] }</td>
-        <td>
+      <tr className="table-row-container">
+        <td className="table-row-content">{ user._id }</td>
+        <td className="table-row-content">{ user.name }</td>
+        <td className="table-row-content">{ user.age }</td>
+        <td className="table-row-content">{ user['gitHubUser'] }</td>
+        <td className="table-row-address">
           { joinAddress() } 
+        </td>
+        <td>
           <button onClick={ () => confirmDelete() } data-testid="delete-button">D</button>
           <button onClick={ () => saveUserIdToUpdate() } data-testid="update-button">A</button>
           <button onClick={ () => saveUserIdToDetailPage() }>V</button>
