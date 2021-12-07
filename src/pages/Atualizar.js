@@ -3,6 +3,10 @@ import { Navigate } from 'react-router-dom';
 import { getCEP, getGitHub } from '../services/api';
 import UpdateForm from '../components/UpdateForm';
 
+import Header from '../components/Header';
+
+import '../css/Cadastrar.css';
+
 function Atualizar() {
   const [redirectToHomePage, setRedirectToHomePage] = useState(false);
   const [userId, setUserId] = useState('');
@@ -21,7 +25,6 @@ function Atualizar() {
   const [disableSaveButton, setDisableSaveButton] = useState(true);
   const [messageInvalidCep, setMessageInvalidCep] = useState(false);
   const [messageInvalidGitHubUser, setMessageInvalidGitHubUser] = useState(false);
-  const [messageUserAlreadyRegistered, setMessageUserAlreadyRegistered] = useState(false);
   
   useEffect(() => {
     const getUserById = async () => {
@@ -133,7 +136,8 @@ function Atualizar() {
   }
 
   return (
-    <div>
+    <div className="register-page">
+      <Header />
       <UpdateForm
         newName={ newName }
         setNewName={ setNewName }
@@ -153,19 +157,26 @@ function Atualizar() {
         setNewComplement={ setNewComplement }
         messageInvalidCep={ messageInvalidCep }
         messageInvalidGitHubUser={ messageInvalidGitHubUser }
-        messageUserAlreadyRegistered={ messageUserAlreadyRegistered }
       />
 
-      <br />
+      <div className="buttons-container">
+        <button
+          onClick={ () =>  setRedirectToHomePage(true) }
+          className="button-cancel"
+        >
+          Cancelar
+        </button>
 
-      <button onClick={ () =>  setRedirectToHomePage(true) }>Cancelar</button>
-      <button
-        disabled={ disableSaveButton }
-        onClick={ () => updateUser() }
-        data-testid="save-button"
-      >
-        Salvar
-      </button>
+        <button
+          disabled={ disableSaveButton }
+          onClick={ () => updateUser() }
+          data-testid="save-button"
+          className="button-save"
+        >
+          Salvar
+        </button>
+      </div>
+
       { redirectToHomePage ?  <Navigate to="/home" /> : null}
     </div>
   );

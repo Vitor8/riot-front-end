@@ -1,7 +1,7 @@
 .register-page {
   border-radius: 1%;
   box-shadow: 1px 1px rgb(180, 177, 177);
-  height: 900px;
+  height: 970px;
   font-size: 15px;
   background-color: rgb(237,238,239);
 }
@@ -67,6 +67,10 @@
 
 .button-save:hover {
   box-shadow: 1px 1px gray;
+}
+
+.button-save:disabled {
+  background-color: #ddcbab;
 }
 
 .warning-text {
