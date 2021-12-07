@@ -1,0 +1,74 @@
+.register-page {
+  border-radius: 1%;
+  box-shadow: 1px 1px rgb(180, 177, 177);
+  height: 900px;
+  font-size: 15px;
+  background-color: rgb(237,238,239);
+}
+
+.register-content {
+  background-color: white;
+  padding: 1%;
+  margin-top: 2%;
+  margin-left: 12%;
+  margin-right: 10%;
+}
+
+.register-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input-text {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.buttons-container {
+  background-color: white;
+  padding: 1%;
+  margin-left: 12%;
+  margin-right: 10%;
+}
+
+.button-cancel {
+  border-color: #dda439;
+  color: #af770f;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 100px;
+  margin-left: 72%;
+}
+
+.button-cancel:hover {
+  box-shadow: 1px 1px gray;
+}
+
+.button-save {
+  background-color: #E2BB74;
+  color: rgb(255, 255, 255);
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 100px;
+  margin-left: 1%;
+}
+
+.button-save:hover {
+  box-shadow: 1px 1px gray;
+}
+
+.warning-text {
+  color: red;
+}

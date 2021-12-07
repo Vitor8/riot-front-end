@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
 import { getCEP, getGitHub } from '../services/api';
+import Header from '../components/Header';
+
+import '../css/Cadastrar.css';
 
 function Cadastrar() {
   const [redirectToHomePage, setRedirectToHomePage] = useState(false);
@@ -129,7 +132,8 @@ function Cadastrar() {
   }
 
   return (
-    <div>
+    <div className="register-page">
+      <Header />
       <RegisterForm
         name={ name }
         age={ age }
@@ -151,14 +155,25 @@ function Cadastrar() {
         messageUserAlreadyRegistered={ messageUserAlreadyRegistered }
       />
 
-      <button onClick={ () =>  setRedirectToHomePage(true) }>Cancelar</button>
+    <div className="buttons-container">
+      <button
+        onClick={ () =>  setRedirectToHomePage(true) }
+        className="button-cancel"
+      >
+        Cancelar
+      </button>
+
       <button
         disabled={ disableSaveButton }
         onClick={ () => saveNewUser() }
         data-testid="save-button"
+        className="button-save"
       >
         Salvar
       </button>
+    </div>
+    
+
       { redirectToHomePage ?  <Navigate to="/home" /> : null}
     </div>
   );
