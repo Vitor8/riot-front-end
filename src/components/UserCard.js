@@ -59,12 +59,14 @@ function UserCard({ user }) {
             width="20px"
             height="20px"
             data-testid="delete-button"
+            alt="icone lixeira"
           />
           <img
             src={ Olho }
             width="20px"
             height="20px"
             onClick={ () => saveUserIdToDetailPage() }
+            alt="icone visualização"
           />
           <img
             src={ Pen }
@@ -72,6 +74,7 @@ function UserCard({ user }) {
             data-testid="update-button"
             width="20px"
             height="20px"
+            alt="icone atualização"
           />
 
         </td>
