@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import Lixeira from '../images/lixeira.png';
+import Olho from '../images/eye.png';
+import Pen from '../images/pen.png';
 
 function UserCard({ user }) {
   const [redirectToUpdatePage, setRedirectToUpdatePage] = useState(false);
@@ -50,9 +53,27 @@ function UserCard({ user }) {
           { joinAddress() } 
         </td>
         <td>
-          <button onClick={ () => confirmDelete() } data-testid="delete-button">D</button>
-          <button onClick={ () => saveUserIdToUpdate() } data-testid="update-button">A</button>
-          <button onClick={ () => saveUserIdToDetailPage() }>V</button>
+          <img
+            onClick={ () => confirmDelete() }
+            src={ Lixeira }
+            width="20px"
+            height="20px"
+            data-testid="delete-button"
+          />
+          <img
+            src={ Olho }
+            width="20px"
+            height="20px"
+            onClick={ () => saveUserIdToDetailPage() }
+          />
+          <img
+            src={ Pen }
+            onClick={ () => saveUserIdToUpdate() }
+            data-testid="update-button"
+            width="20px"
+            height="20px"
+          />
+
         </td>
       </tr>
       { redirectToUpdatePage && <Navigate to='/atualizar' /> }

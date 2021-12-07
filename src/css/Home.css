@@ -21,13 +21,13 @@
 }
 
 .button-register {
+  margin-left: 1%;
   background-color: #E2BB74;
   border: none;
   color: white;
   padding: 8px 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 13px;
   font-weight: bold;
   border-radius: 5px;
