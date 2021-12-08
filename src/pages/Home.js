@@ -43,7 +43,7 @@ function Home() {
         <div className="table-container">
           <div className="buttons-container">
 
-            <button className="button-register" onClick={ () => setRedirectToRegisterPage(true) }>
+            <button className="button-register" data-testid="button-cadastrar" onClick={ () => setRedirectToRegisterPage(true) }>
               Cadastrar
             </button>
             <input type="text" placeholder="Busca" onChange={ (e) => getSearchUsers(e.target.value) } />

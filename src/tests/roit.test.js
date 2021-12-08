@@ -32,10 +32,16 @@ describe('1 - Testa se é possível criar novos usuários', () => {
         <App />
       </BrowserRouter>,
     );
+    const emailInput = screen.getByTestId("email-input");
+    const passwordInput = screen.getByTestId("password-input");
+
+    userEvent.type(emailInput, 'v@gmail.com');
+    userEvent.type(passwordInput, '123456');
+
     expect(screen.getByTestId('login-button')).toBeInTheDocument();
     fireEvent.click(screen.getByTestId('login-button'));
-    await waitFor(() => screen.getByText(/Cadastrar/i));
-    expect(screen.getByText(/Cadastrar/i)).toBeInTheDocument();
+    await waitFor(() => screen.getByTestId('button-cadastrar'));
+    expect(screen.getByTestId('button-cadastrar')).toBeInTheDocument();
   });
 
   test('Ao clicar no botão de Cadastrar a página de cadastro deve ser renderizada', async () => {
