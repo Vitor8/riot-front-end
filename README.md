@@ -81,4 +81,4 @@ Na nossa Home Page, ao clicarmos no ícone do olho de algum determinado usuário
 
 ## Teste unitários
 
-Foi utilizado a [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) e o Jest para criação dos testes unitários. Para rodar os testes digite no terminal `npm test`. O arquivo com os teste se encontra no seguinte caminho -> Na raiz da aplicação abra a pasta `src`, depois a pasta `test`, e o arquivo `roit.test.js`.
+Foi utilizado a [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) e o Jest para criação dos testes unitários. Para rodar os testes digite no terminal `npm test`. O arquivo com os testes se encontra no seguinte caminho -> Na raiz da aplicação abra a pasta `src`, depois a pasta `test`, e o arquivo `roit.test.js`.
